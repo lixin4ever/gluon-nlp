@@ -25,6 +25,7 @@ from __future__ import print_function
 
 __all__ = ['ClipSequence', 'PadSequence', 'NLTKMosesTokenizer', 'SpacyTokenizer',
            'NLTKMosesDetokenizer', 'JiebaTokenizer', 'NLTKStanfordSegmenter']
+<<<<<<< HEAD
 
 import os
 
@@ -32,6 +33,12 @@ import numpy as np
 import mxnet as mx
 from mxnet.gluon.utils import download, check_sha1
 from .utils import _get_home_dir, _extract_archive
+=======
+
+import numpy as np
+import mxnet as mx
+import os
+>>>>>>> add classes JiebaToknizer and NLTKStanfordSegmenter for Chinese Word Tokenization
 
 
 class ClipSequence(object):
@@ -392,6 +399,7 @@ class JiebaTokenizer(object):
 
 
 class NLTKStanfordSegmenter(object):
+<<<<<<< HEAD
     r"""Apply the Stanford Chinese Word Segmenter implemented in NLTK.
 
     Users of this class are required to install Java, NLTK and download Stanford Word Segmenter
@@ -412,6 +420,38 @@ class NLTKStanfordSegmenter(object):
     Examples
     --------
     >>> tokenizer = NLTKStanfordSegmenter()
+=======
+    r"""Apply the NLTK Wrapper of Stanford Chinese Word Segmenter.
+
+    Users of this class are required to `install NLTK <https://www.nltk.org/install.html>`_ and
+    download Stanford Word Segmenter `<https://nlp.stanford.edu/software/segmenter.html#Download>`_
+
+    Parameters
+    ----------
+    path_to_jar : str, Path to stanford-segmenter.jar.
+
+    path_to_slf4j : str, Path to slf4j-api.jar.
+
+    path_to_dict : str, Path to external dictionary dict-chris6.ser.gz.
+
+    path_to_model : str, Path to pre-trained segmentation model.
+        options are pku.gz and ctb.gz.
+
+    path_to_sihan_corpora_dict : str, Path to folder for storing dictionaries in sighan corpora.
+
+    java_class : str, default 'edu.stanford.nlp.ie.crf.CRFClassifier'
+        The model used for segmentation
+
+    Examples
+    --------
+    >>> tokenizer = NLTKStanfordSegmenter(
+        path_to_jar='PATH_TO_STANFORD_HOME/segmenter/stanford-segmenter-3.9.1.jar',
+        path_to_model="PATH_TO_STANFORD_HOME/segmenter/data/pku.gz",
+        path_to_dict="PATH_TO_STANFORD_HOME/segmenter/data/dict-chris6.ser.gz",
+        path_to_slf4j="PATH_TO_STANFORD_HOME/segmenter/slf4j-api.jar",
+        path_to_sihan_corpora_dict="PATH_TO_STANFORD_HOME/segmenter/data"
+        java_class="edu.stanford.nlp.ie.crf.CRFClassifier")
+>>>>>>> add classes JiebaToknizer and NLTKStanfordSegmenter for Chinese Word Tokenization
     >>> tokenizer(u"我来到北京清华大学")
     ['我',
      '来到',
@@ -433,17 +473,24 @@ class NLTKStanfordSegmenter(object):
      '深造']
 
     """
+<<<<<<< HEAD
     def __init__(self, segmenter_root=os.path.join(_get_home_dir(), 'stanford-segmenter'),
                  slf4j_root=os.path.join(_get_home_dir(), 'slf4j'),
                  java_class='edu.stanford.nlp.ie.crf.CRFClassifier'):
         is_java_exist = os.system('java -version')
         assert is_java_exist == 0, 'Java is not installed. You must install Java 8.0' \
                                    'in order to use the NLTKStanfordSegmenter'
+=======
+    def __init__(self, path_to_jar, path_to_slf4j, path_to_dict,
+                 path_to_model, path_to_sihan_corpora_dict,
+                 java_class='edu.stanford.nlp.ie.crf.CRFClassifier'):
+>>>>>>> add classes JiebaToknizer and NLTKStanfordSegmenter for Chinese Word Tokenization
         try:
             from nltk.tokenize import StanfordSegmenter
         except ImportError:
             raise ImportError('NLTK or relevant packages are not installed. You must install NLTK '
                               'in order to use the NLTKStanfordSegmenter. You can refer to the '
+<<<<<<< HEAD
                               'official installation guide in https://www.nltk.org/install.html.')
         path_to_jar = os.path.join(segmenter_root, 'stanford-segmenter-2018-02-27',
                                    'stanford-segmenter-3.9.1.jar')
@@ -478,6 +525,13 @@ class NLTKStanfordSegmenter(object):
                 os.mkdir(slf4j_root)
             download(url=slf4j_url, path=slf4j_root, sha1_hash=slf4j_sha1)
             _extract_archive(file=slf4j, target_dir=slf4j_root)
+=======
+                              'official installation guide in https://www.nltk.org/install.html .')
+        assert os.path.exists(path_to_jar), "stanford-segmenter.jar NOT FOUND!"
+        assert os.path.exists(path_to_model), "segmentation model NOT FOUND!"
+        assert os.path.exists(path_to_slf4j), "slf4j-api.jar NOT FOUND!"
+        assert os.path.exists(path_to_dict), "dictionary file NOT FOUND!"
+>>>>>>> add classes JiebaToknizer and NLTKStanfordSegmenter for Chinese Word Tokenization
         self._tokenizer = StanfordSegmenter(java_class=java_class, path_to_jar=path_to_jar,
                                             path_to_slf4j=path_to_slf4j, path_to_dict=path_to_dict,
                                             path_to_sihan_corpora_dict=path_to_sihan_corpora_dict,
