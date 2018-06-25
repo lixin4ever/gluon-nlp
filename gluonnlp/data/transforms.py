@@ -712,11 +712,18 @@ class NLTKStanfordSegmenter(object):
             _extract_archive(file=slf4j, target_dir=slf4j_root)
 =======
                               'official installation guide in https://www.nltk.org/install.html .')
+<<<<<<< HEAD
         assert os.path.exists(path_to_jar), "stanford-segmenter.jar NOT FOUND!"
         assert os.path.exists(path_to_model), "segmentation model NOT FOUND!"
         assert os.path.exists(path_to_slf4j), "slf4j-api.jar NOT FOUND!"
         assert os.path.exists(path_to_dict), "dictionary file NOT FOUND!"
 >>>>>>> add classes JiebaToknizer and NLTKStanfordSegmenter for Chinese Word Tokenization
+=======
+        assert os.path.exists(path_to_jar), 'stanford-segmenter.jar NOT FOUND!'
+        assert os.path.exists(path_to_model), 'segmentation model NOT FOUND!'
+        assert os.path.exists(path_to_slf4j), 'slf4j-api.jar NOT FOUND!'
+        assert os.path.exists(path_to_dict), 'dictionary file NOT FOUND!'
+>>>>>>> fix a small bug
         self._tokenizer = StanfordSegmenter(java_class=java_class, path_to_jar=path_to_jar,
                                             path_to_slf4j=path_to_slf4j, path_to_dict=path_to_dict,
                                             path_to_sihan_corpora_dict=path_to_sihan_corpora_dict,
