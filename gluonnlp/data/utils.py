@@ -329,9 +329,11 @@ def _extract_archive(file, target_dir):
     elif file.endswith('.zip'):
         archive = zipfile.ZipFile(file, 'r')
     else:
+<<<<<<< HEAD
         raise Exception('Unrecognized file type: ' + file)
     archive.extractall(path=target_dir)
     archive.close()
+<<<<<<< HEAD
 
 
 def line_splitter(s):
@@ -364,3 +366,14 @@ def whitespace_splitter(s):
         List of strings. Obtained by calling s.split().
     """
     return s.split()
+=======
+=======
+        raise Exception("Unrecognized file type!!!")
+    archive.extractall(path=target_dir)
+    archive.close()
+    # remove the archive file
+    os.remove(file)
+
+
+>>>>>>> enable the automatic downloading of the required files of stanford segmenter
+>>>>>>> enable the automatic downloading of the required files of stanford segmenter
