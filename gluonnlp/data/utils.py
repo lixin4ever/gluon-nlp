@@ -330,6 +330,7 @@ def _extract_archive(file, target_dir):
         archive = zipfile.ZipFile(file, 'r')
     else:
 <<<<<<< HEAD
+<<<<<<< HEAD
         raise Exception('Unrecognized file type: ' + file)
     archive.extractall(path=target_dir)
     archive.close()
@@ -369,11 +370,20 @@ def whitespace_splitter(s):
 =======
 =======
         raise Exception("Unrecognized file type!!!")
+=======
+        raise Exception('Unrecognized file type!!!')
+>>>>>>> small fix
     archive.extractall(path=target_dir)
     archive.close()
     # remove the archive file
     os.remove(file)
+<<<<<<< HEAD
 
 
 >>>>>>> enable the automatic downloading of the required files of stanford segmenter
+<<<<<<< HEAD
 >>>>>>> enable the automatic downloading of the required files of stanford segmenter
+=======
+=======
+>>>>>>> small fix
+>>>>>>> small fix
