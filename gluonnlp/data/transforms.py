@@ -32,6 +32,7 @@ import os
 import numpy as np
 import mxnet as mx
 <<<<<<< HEAD
+<<<<<<< HEAD
 from mxnet.gluon.utils import download, check_sha1
 from .utils import _get_home_dir, _extract_archive
 =======
@@ -49,6 +50,10 @@ import os
 from mxnet.gluon.utils import download
 from .utils import _get_home_dir, _extract_archive
 >>>>>>> enable the automatic downloading of the required files of stanford segmenter
+=======
+from mxnet.gluon.utils import download, check_sha1
+from .utils import _get_home_dir, _get_stanford_home_dir, _extract_archive
+>>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
 
 
 class ClipSequence(object):
@@ -441,20 +446,13 @@ class NLTKStanfordSegmenter(object):
 
     Parameters
     ----------
-    path_to_jar : str, default ''
-        Path to stanford-segmenter.jar.
+    stanford_root : str, default '$STANFORD_HOME'
+        Path to folder for storing stanford toolkits.
+        STANFORD_HOME defaults to '$MXNET_HOME/stanford'.
 
-    path_to_slf4j : str, default ''
-        Path to slf4j-api.jar.
-
-    path_to_dict : str, default ''
-        Path to external dictionary dict-chris6.ser.gz.
-
-    path_to_model : str, default ''
-        Path to pre-trained segmentation model.
-
-    path_to_sihan_corpora_dict : str, default ''
-        Path to folder for storing dictionaries in sighan corpora.
+    slf4j_root : str, default '$MXNET_HOME/slf4j'
+        Path to foler for storing slf4j.
+        MXNET_HOME defaults to '~/.mxnet'
 
     java_class : str, default 'edu.stanford.nlp.ie.crf.CRFClassifier'
         The learning algorithm used for segmentation
@@ -496,6 +494,7 @@ class NLTKStanfordSegmenter(object):
     """
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     def __init__(self, segmenter_root=os.path.join(_get_home_dir(), 'stanford-segmenter'),
                  slf4j_root=os.path.join(_get_home_dir(), 'slf4j'),
                  java_class='edu.stanford.nlp.ie.crf.CRFClassifier'):
@@ -510,6 +509,10 @@ class NLTKStanfordSegmenter(object):
 =======
     def __init__(self, path_to_jar='', path_to_slf4j='', path_to_dict='',
                  path_to_model='', path_to_sihan_corpora_dict='',
+=======
+    def __init__(self, stanford_root=_get_stanford_home_dir(),
+                 slf4j_root=os.path.join(_get_home_dir(), 'slf4j'),
+>>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
                  java_class='edu.stanford.nlp.ie.crf.CRFClassifier'):
         is_java_exist = os.system('java -version')
         assert is_java_exist == 0, 'Java is not installed. You must install Java 8.0' \
@@ -572,6 +575,7 @@ class NLTKStanfordSegmenter(object):
 >>>>>>> fix a small bug
 =======
                               'official installation guide in https://www.nltk.org/install.html.')
+<<<<<<< HEAD
         try:
             assert os.path.exists(path_to_jar)
             assert os.path.exists(path_to_model)
@@ -607,6 +611,41 @@ class NLTKStanfordSegmenter(object):
                 _extract_archive(file=slf4j, target_dir=slf4j_home)
             path_to_slf4j = os.path.join(slf4j_home, 'slf4j-1.7.25', 'slf4j-api-1.7.25.jar')
 >>>>>>> enable the automatic downloading of the required files of stanford segmenter
+=======
+        path_to_jar = os.path.join(stanford_root, 'stanford-segmenter-2018-02-27',
+                                   'stanford-segmenter-3.9.1.jar')
+        path_to_model = os.path.join(stanford_root, 'stanford-segmenter-2018-02-27',
+                                     'data', 'pku.gz')
+        path_to_dict = os.path.join(stanford_root, 'stanford-segmenter-2018-02-27',
+                                    'data', 'dict-chris6.ser.gz')
+        path_to_sihan_corpora_dict = os.path.join(stanford_root,
+                                                  'stanford-segmenter-2018-02-27', 'data')
+        segmenter_url = 'https://nlp.stanford.edu/software/stanford-segmenter-2018-02-27.zip'
+        segmenter_sha1 = 'aa27a6433704b7b4c6a14be1c126cb4b14b8f57b'
+        stanford_segmenter = os.path.join(stanford_root, 'stanford-segmenter-2018-02-27.zip')
+        if not os.path.exists(path_to_jar) or \
+                not os.path.exists(path_to_model) or \
+                not os.path.exists(path_to_dict) or \
+                not os.path.exists(path_to_sihan_corpora_dict) or \
+                not check_sha1(filename=stanford_segmenter, sha1_hash=segmenter_sha1):
+            # automatically download the files from the website and place them to stanford_root
+            if not os.path.exists(stanford_root):
+                os.mkdir(stanford_root)
+            download(url=segmenter_url, path=stanford_root, sha1_hash=segmenter_sha1)
+            _extract_archive(file=stanford_segmenter, target_dir=stanford_root)
+
+        path_to_slf4j = os.path.join(slf4j_root, 'slf4j-1.7.25', 'slf4j-api-1.7.25.jar')
+        slf4j_url = 'https://www.slf4j.org/dist/slf4j-1.7.25.zip'
+        slf4j_sha1 = '89ea41ad6ebe1b190139421bb7c8d981e9df1625'
+        slf4j = os.path.join(slf4j_root, 'slf4j-1.7.25.zip')
+        if not os.path.exists(path_to_slf4j) or \
+                not check_sha1(filename=slf4j, sha1_hash=slf4j_sha1):
+            # automatically download the files from the website and place them to slf4j_root
+            if not os.path.exists(slf4j_root):
+                os.mkdir(slf4j_root)
+            download(url=slf4j_url, path=slf4j_root, sha1_hash=slf4j_sha1)
+            _extract_archive(file=slf4j, target_dir=slf4j_root)
+>>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
         self._tokenizer = StanfordSegmenter(java_class=java_class, path_to_jar=path_to_jar,
                                             path_to_slf4j=path_to_slf4j, path_to_dict=path_to_dict,
                                             path_to_sihan_corpora_dict=path_to_sihan_corpora_dict,
