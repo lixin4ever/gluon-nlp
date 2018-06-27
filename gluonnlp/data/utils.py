@@ -313,6 +313,14 @@ def _get_home_dir():
     return _home_dir
 
 
+def _get_stanford_home_dir():
+    """Get home directory for stanford toolkits"""
+    _stanford_home_dir = os.environ.get('STANFORD_HOME',
+                                        os.path.join(_get_home_dir(), 'stanford'))
+    _stanford_home_dir = os.path.expanduser(_stanford_home_dir)
+    return _stanford_home_dir
+
+
 def _extract_archive(file, target_dir):
     """Extract archive file
 
@@ -329,6 +337,7 @@ def _extract_archive(file, target_dir):
     elif file.endswith('.zip'):
         archive = zipfile.ZipFile(file, 'r')
     else:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         raise Exception('Unrecognized file type: ' + file)
@@ -386,4 +395,12 @@ def whitespace_splitter(s):
 =======
 =======
 >>>>>>> small fix
+<<<<<<< HEAD
 >>>>>>> small fix
+=======
+=======
+        raise Exception('Unrecognized file type: ' + file)
+    archive.extractall(path=target_dir)
+    archive.close()
+>>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
+>>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
