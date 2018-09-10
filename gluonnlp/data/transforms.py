@@ -31,7 +31,10 @@ __all__ = ['ClipSequence', 'PadSequence', 'SacreMosesTokenizer', 'NLTKMosesToken
 __all__ = ['ClipSequence', 'PadSequence', 'NLTKMosesTokenizer', 'SpacyTokenizer',
            'NLTKMosesDetokenizer', 'JiebaTokenizer', 'NLTKStanfordSegmenter']
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> add classes JiebaToknizer and NLTKStanfordSegmenter for Chinese Word Tokenization
+=======
+>>>>>>> 4292ecdf067ce7a4357911d563c3e072fbf2181c
 
 import os
 import warnings
@@ -678,12 +681,36 @@ class NLTKStanfordSegmenter(object):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     def __init__(self, segmenter_root=os.path.join(_get_home_dir(), 'stanford-segmenter'),
                  slf4j_root=os.path.join(_get_home_dir(), 'slf4j'),
                  java_class='edu.stanford.nlp.ie.crf.CRFClassifier'):
         is_java_exist = os.system('java -version')
         assert is_java_exist == 0, 'Java is not installed. You must install Java 8.0' \
                                    'in order to use the NLTKStanfordSegmenter'
+=======
+    def __init__(self, path_to_jar, path_to_slf4j, path_to_dict,
+                 path_to_model, path_to_sihan_corpora_dict,
+                 java_class='edu.stanford.nlp.ie.crf.CRFClassifier'):
+>>>>>>> add classes JiebaToknizer and NLTKStanfordSegmenter for Chinese Word Tokenization
+=======
+    def __init__(self, path_to_jar='', path_to_slf4j='', path_to_dict='',
+                 path_to_model='', path_to_sihan_corpora_dict='',
+=======
+    def __init__(self, stanford_root=_get_stanford_home_dir(),
+=======
+=======
+>>>>>>> 4292ecdf067ce7a4357911d563c3e072fbf2181c
+    def __init__(self, segmenter_root=os.path.join(_get_home_dir(), 'stanford-segmenter'),
+>>>>>>> remove the unused function and update the constructor of NLTKStanfordSegmenter
+                 slf4j_root=os.path.join(_get_home_dir(), 'slf4j'),
+>>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
+                 java_class='edu.stanford.nlp.ie.crf.CRFClassifier'):
+        is_java_exist = os.system('java -version')
+        assert is_java_exist == 0, 'Java is not installed. You must install Java 8.0' \
+                                   'in order to use the NLTKStanfordSegmenter'
+<<<<<<< HEAD
+=======
 =======
     def __init__(self, path_to_jar, path_to_slf4j, path_to_dict,
                  path_to_model, path_to_sihan_corpora_dict,
@@ -703,6 +730,7 @@ class NLTKStanfordSegmenter(object):
         is_java_exist = os.system('java -version')
         assert is_java_exist == 0, 'Java is not installed. You must install Java 8.0' \
                                    'in order to use the NLTKStanfordSegmenter'
+>>>>>>> 4292ecdf067ce7a4357911d563c3e072fbf2181c
 >>>>>>> enable the automatic downloading of the required files of stanford segmenter
         try:
             from nltk.tokenize import StanfordSegmenter

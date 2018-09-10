@@ -336,6 +336,7 @@ def _extract_archive(file, target_dir):
     archive.extractall(path=target_dir)
     archive.close()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 def line_splitter(s):
@@ -370,6 +371,8 @@ def whitespace_splitter(s):
     return s.split()
 =======
 =======
+>>>>>>> 4292ecdf067ce7a4357911d563c3e072fbf2181c
+=======
         raise Exception("Unrecognized file type!!!")
 =======
         raise Exception('Unrecognized file type!!!')
@@ -383,6 +386,7 @@ def whitespace_splitter(s):
 
 >>>>>>> enable the automatic downloading of the required files of stanford segmenter
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> enable the automatic downloading of the required files of stanford segmenter
 =======
 =======
@@ -391,8 +395,15 @@ def whitespace_splitter(s):
 >>>>>>> small fix
 =======
 =======
+=======
+>>>>>>> small fix
+>>>>>>> 4292ecdf067ce7a4357911d563c3e072fbf2181c
+=======
         raise Exception('Unrecognized file type: ' + file)
     archive.extractall(path=target_dir)
     archive.close()
 >>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
+<<<<<<< HEAD
 >>>>>>> add hash check for partial download and refine the constructor of NLTKStanfordSegmenter
+=======
+>>>>>>> 4292ecdf067ce7a4357911d563c3e072fbf2181c
